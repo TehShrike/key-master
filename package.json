@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/TehShrike/key-master/issues"
   },
-  "homepage": "https://github.com/TehShrike/key-master"
+  "homepage": "https://github.com/TehShrike/key-master",
+  "devDependencies": {
+    "tape": "^4.0.0"
+  }
 }
