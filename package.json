@@ -1,0 +1,23 @@
+{
+  "name": "key-master",
+  "version": "1.0.0",
+  "description": "hashmap + constructor function = a hashmap you don't have to check before calling get()",
+  "main": "index.js",
+  "scripts": {
+    "test": "tape test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TehShrike/key-master.git"
+  },
+  "keywords": [
+    "map",
+    "hashmap"
+  ],
+  "author": "TehShrike",
+  "license": "WTFPL",
+  "bugs": {
+    "url": "https://github.com/TehShrike/key-master/issues"
+  },
+  "homepage": "https://github.com/TehShrike/key-master"
+}
