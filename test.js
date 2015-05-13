@@ -75,7 +75,7 @@ test('set and delete return', function (t) {
 	t.equal(map.set('key1', 3), 3)
 	t.equal(map.set('key2'), undefined)
 	t.ok(map.remove('key1'))
-	t.notOk(map.remove('key1'))
+	t.ok(map.remove('key1'))
 	t.end()
 })
 
