@@ -83,8 +83,7 @@ test('constructor called with "new"', function (t) {
 	var map = new KeyMaster(CalledWithNew)
 
 	function CalledWithNew() {
-		var window = window || global
-		return this !== window
+		return this.constructor === CalledWithNew
 	}
 	t.notOk(CalledWithNew())
 	t.ok(new CalledWithNew())
@@ -100,5 +99,16 @@ test('pass the key to the constructor', function(t) {
 
 	t.equal(map.get('first').value, 'first returned')
 	t.equal(map.get('last').value, 'last returned')
+	t.end()
+})
+
+test('Make sure the constructor can return a function', function(t) {
+	var map = new KeyMaster(function(key) {
+		return function() {
+			return 'yes'
+		}
+	})
+
+	t.equal(map.get()(), 'yes')
 	t.end()
 })
