@@ -1,8 +1,10 @@
 # key-master
 
+Replaces "maintain a map of constructed objects" boilerplate.
+
 [![Build Status](https://travis-ci.org/TehShrike/key-master.svg)](https://travis-ci.org/TehShrike/key-master)
 
-Look familiar?
+Seen this pattern before?
 
 ```js
 
@@ -45,11 +47,13 @@ actuallyDoStuff(map.get(thing))
 
 The constructor function is called whenever the map doesn't already have a value for the given key.
 
+It is passed the key as its first argument.
+
 ## Getter
 
 `map.get(key)`
 
-Returns the value in the map.  If there isn't a value for that key, the constructor calls the `defaultValueReturningFunction` passed to the constructor, inserts that new value into the map, and returns it.
+Returns the value in the map.  If there isn't a value for that key, the constructor calls the `defaultValueReturningFunction` that was passed to the constructor, passing in the key.  Whatever the constructor function returns is inserted into the map and returned by `get`.
 
 ## Setters
 
