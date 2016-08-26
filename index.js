@@ -3,7 +3,7 @@ module.exports = function(constructor) {
 
 	function get(key) {
 		if (typeof map[key] === 'undefined' && typeof constructor === 'function') {
-			map[key] = new constructor()
+			map[key] = new constructor(key)
 		}
 
 		return map[key]

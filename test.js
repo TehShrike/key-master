@@ -59,11 +59,11 @@ test('friendly names', function(t) {
 
 test('no constructor', function (t) {
 	var map = new KeyMaster()
-	
+
 	map.set('key1', 3)
 	map.set('key1')
 	map.set('key2')
-	
+
 	t.equal(map.get('key1'), undefined)
 	t.equal(map.get('key2'), undefined)
 	t.end()
@@ -71,7 +71,7 @@ test('no constructor', function (t) {
 
 test('set and delete return', function (t) {
 	var map = new KeyMaster()
-	
+
 	t.equal(map.set('key1', 3), 3)
 	t.equal(map.set('key2'), undefined)
 	t.ok(map.remove('key1'))
@@ -81,14 +81,24 @@ test('set and delete return', function (t) {
 
 test('constructor called with "new"', function (t) {
 	var map = new KeyMaster(CalledWithNew)
-	
+
 	function CalledWithNew() {
 		var window = window || global
-		return !(this === window)
+		return this !== window
 	}
 	t.notOk(CalledWithNew())
 	t.ok(new CalledWithNew())
-	
+
 	t.ok(map.get('key1'))
+	t.end()
+})
+
+test('pass the key to the constructor', function(t) {
+	var map = new KeyMaster(function(key) {
+		return { value: key + ' returned' }
+	})
+
+	t.equal(map.get('first').value, 'first returned')
+	t.equal(map.get('last').value, 'last returned')
 	t.end()
 })
