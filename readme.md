@@ -45,7 +45,7 @@ actuallyDoStuff(map.get(thing))
 
 `var map = KeyMaster(defaultValueReturningFunction)`
 
-The constructor function is called whenever the map doesn't already have a value for the given key.
+The `defaultValueReturningFunction` is called whenever the map doesn't already have a value for the given key.
 
 It is passed the key as its first argument.
 

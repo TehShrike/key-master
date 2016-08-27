@@ -1,9 +1,9 @@
-module.exports = function(constructor) {
+module.exports = function(factory) {
 	var map = {}
 
 	function get(key) {
-		if (typeof map[key] === 'undefined' && typeof constructor === 'function') {
-			map[key] = new constructor(key)
+		if (typeof map[key] === 'undefined' && typeof factory === 'function') {
+			map[key] = factory(key)
 		}
 
 		return map[key]

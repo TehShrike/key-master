@@ -79,19 +79,6 @@ test('set and delete return', function (t) {
 	t.end()
 })
 
-test('constructor called with "new"', function (t) {
-	var map = new KeyMaster(CalledWithNew)
-
-	function CalledWithNew() {
-		return this.constructor === CalledWithNew
-	}
-	t.notOk(CalledWithNew())
-	t.ok(new CalledWithNew())
-
-	t.ok(map.get('key1'))
-	t.end()
-})
-
 test('pass the key to the constructor', function(t) {
 	var map = new KeyMaster(function(key) {
 		return { value: key + ' returned' }
