@@ -99,3 +99,12 @@ test('Make sure the constructor can return a function', function(t) {
 	t.equal(map.get()(), 'yes')
 	t.end()
 })
+
+test('__proto__ key works', function(t) {
+	var map = new KeyMaster(function(key) {
+		return 'legit'
+	})
+
+	t.equal(map.get('__proto__'), 'legit')
+	t.end()
+})

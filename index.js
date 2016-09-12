@@ -1,5 +1,5 @@
 module.exports = function(factory) {
-	var map = {}
+	var map = Object.create(null)
 
 	function get(key) {
 		if (typeof map[key] === 'undefined' && typeof factory === 'function') {
