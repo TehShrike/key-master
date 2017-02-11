@@ -4,7 +4,7 @@
   "description": "hashmap + constructor function = a hashmap you don't have to check before calling get()",
   "main": "index.js",
   "scripts": {
-    "test": "tape test.js"
+    "test": "tape test.js && jsmd readme.md"
   },
   "repository": {
     "type": "git",
@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/TehShrike/key-master",
   "devDependencies": {
+    "jsmd": "0.3.1",
     "tape": "^4.0.0"
   }
 }

@@ -6,7 +6,18 @@ Replaces "maintain a map of constructed objects" boilerplate.
 
 Seen this pattern before?
 
+<!-- js
+var KeyMaster = require('./')
+function actuallyDoStuff() {
+
+}
+-->
+
 ```js
+
+function defaultValue(key) {
+	return [ key ]
+}
 
 var map = {}
 
@@ -14,7 +25,7 @@ var map = {}
 
 function doStuff(thing) {
 	if (!map[thing]) {
-		map[thing] = defaultValueFactory()
+		map[thing] = defaultValue(thing)
 	}
 
 	actuallyDoStuff(map[thing])
@@ -26,13 +37,11 @@ I figure I've typed that enough times in my life.  Now I'm going to just use thi
 
 ```js
 
-var KeyMaster = require('key-master')
+var map = new KeyMaster(key => defaultValue(key))
 
-var map = new KeyMaster(defaultValueFactory)
+map.get('howdy') // => [ 'howdy' ]
 
-// ...
-
-actuallyDoStuff(map.get(thing))
+actuallyDoStuff(map.get('howdy'))
 
 ```
 
