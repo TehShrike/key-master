@@ -5,13 +5,13 @@ function basicObjectMap() {
 			return obj[key]
 		},
 		set: function(key, value) {
-			return obj[key] = value
+			obj[key] = value
 		},
 		has: function(key) {
 			return Object.prototype.hasOwnProperty.call(obj, key)
 		},
 		delete: function(key) {
-			return delete obj[key]
+			delete obj[key]
 		}
 	}
 }
@@ -32,11 +32,11 @@ module.exports = function(factory, map) {
 	}
 
 	function remove(key) {
-		return map.delete(key)
+		map.delete(key)
 	}
 
 	function set(key, value) {
-		return map.set(key, value)
+		map.set(key, value)
 	}
 
 	return {
