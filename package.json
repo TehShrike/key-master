@@ -1,6 +1,6 @@
 {
   "name": "key-master",
-  "version": "2.0.2",
+  "version": "3.0.0",
   "description": "hashmap + constructor function = a hashmap you don't have to check before calling get()",
   "main": "index.js",
   "scripts": {
