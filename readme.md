@@ -52,11 +52,19 @@ actuallyDoStuff(map.get('howdy'))
 
 ## Constructor
 
-`var map = KeyMaster(defaultValueReturningFunction)`
+`var map = KeyMaster(defaultValueReturningFunction, [map])`
 
 The `defaultValueReturningFunction` is called whenever the map doesn't already have a value for the given key.
 
 It is passed the key as its first argument.
+
+The `map` argument is optional. It can be anything implementing `.get`, `.set`, `.has`, and `.delete`. If not passed in, `KeyMaster` will use a plain javascript object internally.
+
+`new KeyMaster(yourFactory, new WeakMap())`
+
+`new KeyMaster(yourFactory, new Map())`
+
+`new KeyMaster(yourFactory, { get, set, has, delete })`
 
 ## Getter
 
@@ -75,6 +83,12 @@ Inserts a value into the map, overwriting anything that might be there.
 `map.delete(key)`, `map.remove(key)`, `map.unset(key)`
 
 Removes a value from the map.
+
+## Has
+
+`map.has(key)`
+
+Returns `true` if the key exists in the map, `false` if the key does not exist in the map.
 
 # License
 
