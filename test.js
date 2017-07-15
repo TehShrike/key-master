@@ -1,6 +1,14 @@
 var test = require('tape')
 var KeyMaster = require('./')
 
+test('has', function (t) {
+	var map = new KeyMaster(function () {
+		t.fail('No need for the constructor function')
+	})
+	t.false(map.has('x'))
+	t.end()
+})
+
 test('set and get', function(t) {
 	var map = new KeyMaster(function() {
 		t.fail('No need for the constructor function')
@@ -106,5 +114,26 @@ test('__proto__ key works', function(t) {
 	})
 
 	t.equal(map.get('__proto__'), 'legit')
+	t.end()
+})
+
+test('uses map that is passed in', function(t) {
+	var input = new Map()
+	var map = new KeyMaster(function(key) {
+		return 'coffee'
+	}, input)
+
+	map.get('mug')
+	t.equal(input.get('mug'), 'coffee')
+
+	t.false(map.has('x'))
+	map.set('x', 1)
+	t.true(map.has('x'))
+	t.equal(input.get('x'), 1)
+
+	map.delete('x')
+	t.false(map.has('x'))
+	t.false(input.has('x'))
+
 	t.end()
 })
