@@ -1,22 +1,17 @@
-var test = require('tape')
-var KeyMaster = require('./')
+const test = require('tape')
+const KeyMaster = require('./')
 
 function testWithMapConstructor(t, Constructor) {
-	function newMap() {
-		return Constructor ? new Constructor() : undefined
-	}
-	t.test('has', function(t) {
-		var map = new KeyMaster(function() {
-			t.fail('No need for the constructor function')
-		}, newMap())
+	const newMap = () => Constructor ? new Constructor() : undefined
+
+	t.test('has', t => {
+		const map = new KeyMaster(() => t.fail('No need for the constructor function'), newMap())
 		t.false(map.has('x'))
 		t.end()
 	})
 
-	t.test('set and get', function(t) {
-		var map = new KeyMaster(function() {
-			t.fail('No need for the constructor function')
-		}, newMap())
+	t.test('set and get', t => {
+		const map = new KeyMaster(() => t.fail('No need for the constructor function'), newMap())
 
 		map.set('key1', 1)
 		map.set('key2', 2)
@@ -24,11 +19,11 @@ function testWithMapConstructor(t, Constructor) {
 		t.end()
 	})
 
-	t.test('constructor and get', function(t) {
-		var constructorCreatedObjects = []
+	t.test('constructor and get', t => {
+		const constructorCreatedObjects = []
 
-		var map = new KeyMaster(function() {
-			var o = {}
+		const map = new KeyMaster(() => {
+			const o = {}
 			constructorCreatedObjects.push(o)
 			return o
 		}, newMap())
@@ -39,11 +34,11 @@ function testWithMapConstructor(t, Constructor) {
 		t.end()
 	})
 
-	t.test('deleting', function(t) {
-		var constructorCreatedObjects = []
+	t.test('deleting', t => {
+		const constructorCreatedObjects = []
 
-		var map = new KeyMaster(function() {
-			var o = {}
+		const map = new KeyMaster(() => {
+			const o = {}
 			constructorCreatedObjects.push(o)
 			return o
 		}, newMap())
@@ -58,8 +53,8 @@ function testWithMapConstructor(t, Constructor) {
 		t.end()
 	})
 
-	t.test('friendly names', function(t) {
-		var map = new KeyMaster(function() {}, newMap())
+	t.test('friendly names', t => {
+		const map = new KeyMaster(() => {}, newMap())
 
 		t.equal(map.put, map.set)
 		t.equal(map.put, map.add)
@@ -69,8 +64,8 @@ function testWithMapConstructor(t, Constructor) {
 		t.end()
 	})
 
-	t.test('no factory', function(t) {
-		var map = new KeyMaster(undefined, newMap())
+	t.test('no factory', t => {
+		const map = new KeyMaster(undefined, newMap())
 
 		map.set('key1', 3)
 		map.set('key1')
@@ -81,40 +76,30 @@ function testWithMapConstructor(t, Constructor) {
 		t.end()
 	})
 
-	t.test('pass the key to the factory', function(t) {
-		var map = new KeyMaster(function(key) {
-			return { value: key + ' returned' }
-		}, newMap())
+	t.test('pass the key to the factory', t => {
+		const map = new KeyMaster(key => ({ value: key + ' returned' }), newMap())
 
 		t.equal(map.get('first').value, 'first returned')
 		t.equal(map.get('last').value, 'last returned')
 		t.end()
 	})
 
-	t.test('Make sure the factory can return a function', function(t) {
-		var map = new KeyMaster(function(key) {
-			return function() {
-				return 'yes'
-			}
-		}, newMap())
+	t.test('Make sure the factory can return a function', t => {
+		const map = new KeyMaster(key => () => 'yes', newMap())
 
 		t.equal(map.get()(), 'yes')
 		t.end()
 	})
 
-	t.test('__proto__ key works', function(t) {
-		var map = new KeyMaster(function(key) {
-			return 'legit'
-		}, newMap())
+	t.test('__proto__ key works', t => {
+		const map = new KeyMaster(key => 'legit', newMap())
 
 		t.equal(map.get('__proto__'), 'legit')
 		t.end()
 	})
 
-	t.test('has returns true even with undefined value', function(t) {
-		var map = new KeyMaster(function(key) {
-			return key
-		}, newMap())
+	t.test('has returns true even with undefined value', t => {
+		const map = new KeyMaster(key => key, newMap())
 
 		t.false(map.has('key'))
 		map.set('key', undefined)
@@ -123,19 +108,17 @@ function testWithMapConstructor(t, Constructor) {
 	})
 }
 
-test('All basic tests with no constructor', function(t) {
+test('All basic tests with no constructor', t => {
 	testWithMapConstructor(t, null)
 })
 
-test('All basic tests with Map', function(t) {
+test('All basic tests with Map', t => {
 	testWithMapConstructor(t, Map)
 })
 
-test('uses map that is passed in', function(t) {
-	var input = new Map()
-	var map = new KeyMaster(function(key) {
-		return 'coffee'
-	}, input)
+test('uses map that is passed in', t => {
+	const input = new Map()
+	const map = new KeyMaster(key => 'coffee', input)
 
 	map.get('mug')
 	t.equal(input.get('mug'), 'coffee')
