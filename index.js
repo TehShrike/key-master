@@ -1,10 +1,18 @@
 function basicObjectMap() {
 	var obj = Object.create(null)
 	return {
-		get: function(key) { return obj[key] },
-		set: function(key, value) { return obj[key] = value },
-		has: function(key) { return obj[key] !== undefined },
-		delete: function(key) { return delete obj[key] }
+		get: function(key) {
+			return obj[key]
+		},
+		set: function(key, value) {
+			return obj[key] = value
+		},
+		has: function(key) {
+			return Object.prototype.hasOwnProperty.call(obj, key)
+		},
+		delete: function(key) {
+			return delete obj[key]
+		}
 	}
 }
 
@@ -32,7 +40,7 @@ module.exports = function(factory, map) {
 	}
 
 	return {
-    has: has,
+		has: has,
 		get: get,
 		remove: remove,
 		delete: remove,

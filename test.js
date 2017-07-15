@@ -1,8 +1,8 @@
 var test = require('tape')
 var KeyMaster = require('./')
 
-test('has', function (t) {
-	var map = new KeyMaster(function () {
+test('has', function(t) {
+	var map = new KeyMaster(function() {
 		t.fail('No need for the constructor function')
 	})
 	t.false(map.has('x'))
@@ -65,7 +65,7 @@ test('friendly names', function(t) {
 	t.end()
 })
 
-test('no constructor', function (t) {
+test('no constructor', function(t) {
 	var map = new KeyMaster()
 
 	map.set('key1', 3)
@@ -77,7 +77,7 @@ test('no constructor', function (t) {
 	t.end()
 })
 
-test('set and delete return', function (t) {
+test('set and delete return', function(t) {
 	var map = new KeyMaster()
 
 	t.equal(map.set('key1', 3), 3)
@@ -135,5 +135,16 @@ test('uses map that is passed in', function(t) {
 	t.false(map.has('x'))
 	t.false(input.has('x'))
 
+	t.end()
+})
+
+test('has returns true even with undefined value', function(t) {
+	var map = new KeyMaster(function(key) {
+		return key
+	})
+
+	t.false(map.has('key'))
+	map.set('key', undefined)
+	t.true(map.has('key'))
 	t.end()
 })
