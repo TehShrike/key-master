@@ -131,10 +131,6 @@ test('All basic tests with Map', function(t) {
 	testWithMapConstructor(t, Map)
 })
 
-// test('All basic tests with WeakMap', function(t) {
-// 	testWithMapConstructor(t, WeakMap)
-// })
-
 test('uses map that is passed in', function(t) {
 	var input = new Map()
 	var map = new KeyMaster(function(key) {
