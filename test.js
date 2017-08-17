@@ -134,3 +134,30 @@ test('uses map that is passed in', t => {
 
 	t.end()
 })
+
+test('Returning underlying data structure with default map', t => {
+	const map = new KeyMaster(key => 'coffee')
+
+	map.get('heh')
+
+	const output = map.getUnderlyingDataStructure()
+
+	t.deepEqual({ heh: 'coffee' }, output)
+
+	t.end()
+})
+
+test('Returning underlying data structure with Map', t => {
+	const input = new Map()
+	const map = new KeyMaster(key => 'coffee', input)
+
+	map.get('heh')
+
+	const output = map.getUnderlyingDataStructure()
+
+	t.equal(input, output)
+
+	t.end()
+})
+
+

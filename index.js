@@ -12,12 +12,13 @@ function basicObjectMap() {
 		},
 		delete: function(key) {
 			delete obj[key]
-		}
+		},
+		object: obj
 	}
 }
 
-module.exports = function(factory, map) {
-	map = map || basicObjectMap()
+module.exports = function(factory, inputMap) {
+	var map = inputMap || basicObjectMap()
 
 	function has(key) {
 		return map.has(key)
@@ -39,6 +40,10 @@ module.exports = function(factory, map) {
 		map.set(key, value)
 	}
 
+	function getUnderlyingDataStructure() {
+		return inputMap || map.object
+	}
+
 	return {
 		has: has,
 		get: get,
@@ -47,6 +52,7 @@ module.exports = function(factory, map) {
 		unset: remove,
 		set: set,
 		put: set,
-		add: set
+		add: set,
+		getUnderlyingDataStructure: getUnderlyingDataStructure,
 	}
 }

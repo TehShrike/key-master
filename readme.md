@@ -66,9 +66,7 @@ The `map` argument is optional. It can be anything implementing `.get`, `.set`, 
 
 `new KeyMaster(yourFactory, { get, set, has, delete })`
 
-## Getter
-
-`map.get(key)`
+## `map.get(key)`
 
 Returns the value in the map.  If there isn't a value for that key, the constructor calls the `defaultValueReturningFunction` that was passed to the constructor, passing in the key.  Whatever the constructor function returns is inserted into the map and returned by `get`.
 
@@ -84,11 +82,13 @@ Inserts a value into the map, overwriting anything that might be there.
 
 Removes a value from the map.
 
-## Has
-
-`map.has(key)`
+## `map.has(key)`
 
 Returns `true` if the key exists in the map, `false` if the key does not exist in the map.
+
+## `map.getUnderlyingDataStructure()`
+
+Returns the underlying data structure.  If you passed in a map to the constructor, it returns that.  Otherwise, it returns the plain-old object that was used as a hashmap.
 
 # License
 
