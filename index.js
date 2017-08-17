@@ -53,6 +53,6 @@ module.exports = function(factory, inputMap) {
 		set: set,
 		put: set,
 		add: set,
-		getUnderlyingDataStructure,
+		getUnderlyingDataStructure: getUnderlyingDataStructure,
 	}
 }
