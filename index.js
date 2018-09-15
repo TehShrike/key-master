@@ -1,28 +1,4 @@
-function basicObjectMap() {
-	var obj = Object.create(null)
-	return {
-		get: function(key) {
-			return obj[key]
-		},
-		set: function(key, value) {
-			obj[key] = value
-		},
-		has: function(key) {
-			return Object.prototype.hasOwnProperty.call(obj, key)
-		},
-		delete: function(key) {
-			delete obj[key]
-		},
-		object: obj
-	}
-}
-
-module.exports = function(factory, inputMap) {
-	var map = inputMap || basicObjectMap()
-
-	function has(key) {
-		return map.has(key)
-	}
+module.exports = (factory, map = new Map()) => {
 
 	function get(key) {
 		if (!map.has(key) && typeof factory === 'function') {
@@ -32,27 +8,11 @@ module.exports = function(factory, inputMap) {
 		return map.get(key)
 	}
 
-	function remove(key) {
-		map.delete(key)
-	}
-
-	function set(key, value) {
-		map.set(key, value)
-	}
-
-	function getUnderlyingDataStructure() {
-		return inputMap || map.object
-	}
-
 	return {
-		has: has,
-		get: get,
-		remove: remove,
-		delete: remove,
-		unset: remove,
-		set: set,
-		put: set,
-		add: set,
-		getUnderlyingDataStructure: getUnderlyingDataStructure,
+		has: key => map.has(key),
+		get,
+		delete: key => map.delete(key),
+		set: (key, value) => map.set(key, value),
+		getUnderlyingDataStructure: () => map,
 	}
 }
