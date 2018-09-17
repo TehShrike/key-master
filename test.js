@@ -5,13 +5,13 @@ function testWithMapConstructor(t, Constructor) {
 	const newMap = () => Constructor ? new Constructor() : undefined
 
 	t.test('has', t => {
-		const map = new KeyMaster(() => t.fail('No need for the constructor function'), newMap())
+		const map = KeyMaster(() => t.fail('No need for the constructor function'), newMap())
 		t.false(map.has('x'))
 		t.end()
 	})
 
 	t.test('set and get', t => {
-		const map = new KeyMaster(() => t.fail('No need for the constructor function'), newMap())
+		const map = KeyMaster(() => t.fail('No need for the constructor function'), newMap())
 
 		map.set('key1', 1)
 		map.set('key2', 2)
@@ -22,7 +22,7 @@ function testWithMapConstructor(t, Constructor) {
 	t.test('constructor and get', t => {
 		const constructorCreatedObjects = []
 
-		const map = new KeyMaster(() => {
+		const map = KeyMaster(() => {
 			const o = {}
 			constructorCreatedObjects.push(o)
 			return o
@@ -37,7 +37,7 @@ function testWithMapConstructor(t, Constructor) {
 	t.test('deleting', t => {
 		const constructorCreatedObjects = []
 
-		const map = new KeyMaster(() => {
+		const map = KeyMaster(() => {
 			const o = {}
 			constructorCreatedObjects.push(o)
 			return o
@@ -46,26 +46,15 @@ function testWithMapConstructor(t, Constructor) {
 		t.equal(map.get('key1'), constructorCreatedObjects[0])
 		t.equal(map.get('key2'), constructorCreatedObjects[1])
 		t.equal(map.get('key1'), constructorCreatedObjects[0])
-		map.remove('key1')
+		map.delete('key1')
 		t.equal(map.get('key2'), constructorCreatedObjects[1])
 		t.equal(map.get('key1'), constructorCreatedObjects[2])
 
 		t.end()
 	})
 
-	t.test('friendly names', t => {
-		const map = new KeyMaster(() => {}, newMap())
-
-		t.equal(map.put, map.set)
-		t.equal(map.put, map.add)
-
-		t.equal(map.delete, map.remove)
-		t.equal(map.delete, map.unset)
-		t.end()
-	})
-
 	t.test('no factory', t => {
-		const map = new KeyMaster(undefined, newMap())
+		const map = KeyMaster(undefined, newMap())
 
 		map.set('key1', 3)
 		map.set('key1')
@@ -77,7 +66,7 @@ function testWithMapConstructor(t, Constructor) {
 	})
 
 	t.test('pass the key to the factory', t => {
-		const map = new KeyMaster(key => ({ value: key + ' returned' }), newMap())
+		const map = KeyMaster(key => ({ value: key + ' returned' }), newMap())
 
 		t.equal(map.get('first').value, 'first returned')
 		t.equal(map.get('last').value, 'last returned')
@@ -85,21 +74,21 @@ function testWithMapConstructor(t, Constructor) {
 	})
 
 	t.test('Make sure the factory can return a function', t => {
-		const map = new KeyMaster(key => () => 'yes', newMap())
+		const map = KeyMaster(key => () => 'yes', newMap())
 
 		t.equal(map.get()(), 'yes')
 		t.end()
 	})
 
 	t.test('__proto__ key works', t => {
-		const map = new KeyMaster(key => 'legit', newMap())
+		const map = KeyMaster(key => 'legit', newMap())
 
 		t.equal(map.get('__proto__'), 'legit')
 		t.end()
 	})
 
 	t.test('has returns true even with undefined value', t => {
-		const map = new KeyMaster(key => key, newMap())
+		const map = KeyMaster(key => key, newMap())
 
 		t.false(map.has('key'))
 		map.set('key', undefined)
@@ -118,7 +107,7 @@ test('All basic tests with Map', t => {
 
 test('uses map that is passed in', t => {
 	const input = new Map()
-	const map = new KeyMaster(key => 'coffee', input)
+	const map = KeyMaster(key => 'coffee', input)
 
 	map.get('mug')
 	t.equal(input.get('mug'), 'coffee')
@@ -135,21 +124,21 @@ test('uses map that is passed in', t => {
 	t.end()
 })
 
-test('Returning underlying data structure with default map', t => {
-	const map = new KeyMaster(key => 'coffee')
+test('Returning underlying data structure with default Map', t => {
+	const map = KeyMaster(key => 'coffee')
 
 	map.get('heh')
 
 	const output = map.getUnderlyingDataStructure()
 
-	t.deepEqual({ heh: 'coffee' }, output)
+	t.ok(output instanceof Map)
 
 	t.end()
 })
 
 test('Returning underlying data structure with Map', t => {
 	const input = new Map()
-	const map = new KeyMaster(key => 'coffee', input)
+	const map = KeyMaster(key => 'coffee', input)
 
 	map.get('heh')
 
