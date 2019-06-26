@@ -6,7 +6,9 @@
   "scripts": {
     "build": "rm -rf dist && npm run compile && npm test",
     "compile": "npx tsc --project .",
-    "test": "npx tslint --project . && tape test.js && jsmd readme.md"
+    "test": "npx tslint --project . && tape test.js && jsmd readme.md",
+    "prepublishOnly": "echo 'Run \\'npm run publish-package\\' instead' && exit 1",
+    "publish-package": "git push && git push --tags && npm run build && npm publish --access=public --ignore-scripts dist"
   },
   "repository": {
     "type": "git",
