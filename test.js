@@ -1,3 +1,4 @@
+require('ts-node/register')
 const test = require('tape')
 const KeyMaster = require('./')
 

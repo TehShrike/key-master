@@ -3,11 +3,12 @@
 Replaces "maintain a map of constructed objects" boilerplate.
 
 [![Build Status](https://travis-ci.org/TehShrike/key-master.svg)](https://travis-ci.org/TehShrike/key-master)
+![TypeScript supported](https://img.shields.io/npm/types/key-master.svg)
 
 Seen this pattern before?
 
 <!-- js
-var keyMaster = require('./')
+var keyMaster = require('./dist')
 function actuallyDoStuff() {
 
 }
