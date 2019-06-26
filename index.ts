@@ -15,7 +15,7 @@ interface IManagedMap<K, V, GR = V> {
 
 type ValueFactory<K, V> = (key: K) => V
 
-function mapFactory<K, V>(factory?: undefined, map?: IUnderlyingMap<K, V>): IManagedMap<K, V, V | undefined>
+function mapFactory<K, V>(factory?: undefined, map?: IUnderlyingMap<K, V>): IManagedMap<K, V, undefined | V>
 function mapFactory<K, V>(factory: ValueFactory<K, V>, map?: IUnderlyingMap<K, V>): IManagedMap<K, V>
 function mapFactory<K, V, F extends undefined | ValueFactory<K, V> = undefined | ValueFactory<K, V>>(
 	factory?: F,
