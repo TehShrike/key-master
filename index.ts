@@ -2,14 +2,14 @@ interface IUnderlyingMap<K, V> {
 	has(key: K): boolean
 	get(key: K): V | undefined
 	delete(key: K): boolean
-	set(key: K, value: V): this
+	set(key: K, value: V): void
 }
 
 interface IManagedMap<K, V, GR, U extends IUnderlyingMap<K, V>> {
 	has(key: K): boolean
 	get(key: K): GR
 	delete(key: K): boolean
-	set(key: K, value: V): U
+	set(key: K, value: V): void
 	getUnderlyingDataStructure(): U
 }
 
@@ -37,7 +37,7 @@ function mapFactory<K, V, U extends IUnderlyingMap<K, V> = Map<K, V>>(
 			return map.get(key)
 		},
 		delete: (key: K): boolean => map.delete(key),
-		set: (key: K, value: V): U => map.set(key, value),
+		set: (key: K, value: V): void => map.set(key, value),
 		getUnderlyingDataStructure: (): U => map,
 	}
 }
