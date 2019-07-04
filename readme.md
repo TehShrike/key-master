@@ -8,7 +8,8 @@ Replaces "maintain a map of constructed objects" boilerplate.
 Seen this pattern before?
 
 <!-- js
-var keyMaster = require('./dist')
+require('ts-node/register')
+var keyMaster = require('.')
 function actuallyDoStuff() {
 
 }
