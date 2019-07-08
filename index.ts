@@ -5,42 +5,34 @@ interface IUnderlyingMap<K, V> {
 	set(key: K, value: V): void
 }
 
-interface IManagedMap<K, V, GR, U extends IUnderlyingMap<K, V>> {
+interface IManagedMap<K, V> {
 	has(key: K): boolean
-	get(key: K): GR
+	get(key: K): V
 	delete(key: K): boolean
 	set(key: K, value: V): void
-	getUnderlyingDataStructure(): U
+	getUnderlyingDataStructure(): IUnderlyingMap<K, V>
 }
 
 type ValueFactory<K, V> = (key: K) => V
 
-function mapFactory<K, V, U extends IUnderlyingMap<K, V> = Map<K, V>>(
-	factory?: undefined,
-	map?: U,
-): IManagedMap<K, V, undefined | V, U>
-function mapFactory<K, V, U extends IUnderlyingMap<K, V> = Map<K, V>>(
+function mapFactory<K, V>(
 	factory: ValueFactory<K, V>,
-	map?: U,
-): IManagedMap<K, V, V, U>
-function mapFactory<K, V, U extends IUnderlyingMap<K, V> = Map<K, V>>(
-	factory?: ValueFactory<K, V>,
-	map: U = new Map<K, V>() as unknown as U,
-): IManagedMap<K, V, undefined | V, U> {
+	map: IUnderlyingMap<K, V> = new Map<K, V>(),
+): IManagedMap<K, V> {
 	return {
 		has: (key: K): boolean => map.has(key),
-		get: (key: K): undefined | V => {
-			if (!map.has(key) && typeof factory === 'function') {
+		get: (key: K): V => {
+			if (!map.has(key)) {
 				map.set(key, factory(key))
 			}
 
-			return map.get(key)
+			return map.get(key)!
 		},
 		delete: (key: K): boolean => map.delete(key),
 		set: (key: K, value: V): void => {
 			map.set(key, value)
 		},
-		getUnderlyingDataStructure: (): U => map,
+		getUnderlyingDataStructure: (): IUnderlyingMap<K, V> => map,
 	}
 }
 
