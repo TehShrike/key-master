@@ -1,6 +1,6 @@
 require('ts-node/register')
 const test = require('tape')
-const KeyMaster = require('./')
+const KeyMaster = require('./index.ts')
 
 function testWithMapConstructor(t, Constructor) {
 	const newMap = () => Constructor ? new Constructor() : undefined
