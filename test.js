@@ -54,8 +54,8 @@ function testWithMapConstructor(t, Constructor) {
 		t.end()
 	})
 
-	t.test('no factory', t => {
-		const map = KeyMaster(undefined, newMap())
+	t.test('setting undefined values', t => {
+		const map = KeyMaster(k => k, newMap())
 
 		map.set('key1', 3)
 		map.set('key1')
