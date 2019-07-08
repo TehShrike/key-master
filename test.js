@@ -66,6 +66,15 @@ function testWithMapConstructor(t, Constructor) {
 		t.end()
 	})
 
+	t.test('no factory', t => {
+		const map = KeyMaster(undefined, newMap())
+
+		t.throws(() => {
+			map.get('key1')
+		})
+		t.end()
+	})
+
 	t.test('pass the key to the factory', t => {
 		const map = KeyMaster(key => ({ value: key + ' returned' }), newMap())
 
