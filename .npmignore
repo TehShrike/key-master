@@ -1,0 +1,9 @@
+.gitignore
+.travis.yml
+node_modules/
+index-tests.ts
+package-lock.json
+test.js
+tsconfig.json
+tsconfig-tests.json
+tslint.json
