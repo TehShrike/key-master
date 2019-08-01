@@ -1,5 +1,6 @@
+require('ts-node/register')
 const test = require('tape')
-const KeyMaster = require('./')
+const KeyMaster = require('./index.ts')
 
 function testWithMapConstructor(t, Constructor) {
 	const newMap = () => Constructor ? new Constructor() : undefined
@@ -53,8 +54,8 @@ function testWithMapConstructor(t, Constructor) {
 		t.end()
 	})
 
-	t.test('no factory', t => {
-		const map = KeyMaster(undefined, newMap())
+	t.test('setting undefined values', t => {
+		const map = KeyMaster(k => k, newMap())
 
 		map.set('key1', 3)
 		map.set('key1')
@@ -62,6 +63,15 @@ function testWithMapConstructor(t, Constructor) {
 
 		t.equal(map.get('key1'), undefined)
 		t.equal(map.get('key2'), undefined)
+		t.end()
+	})
+
+	t.test('no factory', t => {
+		const map = KeyMaster(undefined, newMap())
+
+		t.throws(() => {
+			map.get('key1')
+		})
 		t.end()
 	})
 

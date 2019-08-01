@@ -4,7 +4,9 @@
   "description": "hashmap + constructor function = a hashmap you don't have to check before calling get()",
   "main": "index.js",
   "scripts": {
-    "test": "tape test.js && jsmd readme.md"
+    "compile": "npx tsc --project .",
+    "prepublishOnly": "npm run compile",
+    "test": "npx tslint --project . && npx tsc --project tsconfig-tests.json && tape test.js && jsmd readme.md"
   },
   "repository": {
     "type": "git",
@@ -22,6 +24,9 @@
   "homepage": "https://github.com/TehShrike/key-master",
   "devDependencies": {
     "jsmd": "1.0.0",
-    "tape": "4.9.1"
+    "tape": "4.9.1",
+    "ts-node": "^8.3.0",
+    "tslint": "^5.18.0",
+    "typescript": "^3.5.2"
   }
 }
