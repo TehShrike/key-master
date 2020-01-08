@@ -5,7 +5,7 @@ interface IUnderlyingMap<K, V> {
 	set(key: K, value: V): void
 }
 
-interface IManagedMap<K, V> {
+export interface IManagedMap<K, V> {
 	has(key: K): boolean
 	get(key: K): V
 	delete(key: K): boolean
