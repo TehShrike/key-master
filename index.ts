@@ -15,7 +15,7 @@ export interface IManagedMap<K, V> {
 
 type ValueFactory<K, V> = (key: K) => V
 
-function mapFactory<K, V>(
+export default function mapFactory<K, V>(
 	factory: ValueFactory<K, V>,
 	map: IUnderlyingMap<K, V> = new Map<K, V>(),
 ): IManagedMap<K, V> {
@@ -35,5 +35,3 @@ function mapFactory<K, V>(
 		getUnderlyingDataStructure: (): IUnderlyingMap<K, V> => map,
 	}
 }
-
-export = mapFactory

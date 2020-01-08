@@ -9,7 +9,7 @@ Seen this pattern before?
 
 <!-- js
 require('ts-node/register')
-var keyMaster = require('.')
+var keyMaster = require('.').default
 function actuallyDoStuff() {
 
 }
@@ -44,7 +44,7 @@ actuallyDoStuff(map.get('howdy'))
 # Usage
 
 - Install: `npm install key-master`
-- Use: `const keyMaster = require('key-master')`
+- Use: `const keyMaster = require('key-master').default`
 
 This library uses ES2015 syntax, so if you're deploying to IE11, you'll need to be transpiling your project with Babel or something.
 
