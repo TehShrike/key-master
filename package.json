@@ -1,6 +1,6 @@
 {
   "name": "key-master",
-  "version": "4.0.0",
+  "version": "4.1.0",
   "description": "hashmap + constructor function = a hashmap you don't have to check before calling get()",
   "main": "cjs/index.js",
   "module": "esm/index.js",
@@ -8,8 +8,8 @@
   "scripts": {
     "compile:cjs": "npx tsc --project . --outDir cjs",
     "compile:esm": "npx tsc --project . --outDir esm --module es2015",
-    "prepublishOnly": "npm run compile:cjs && npm run compile:esm",
-    "test": "npx tslint --project . && npx tsc --project tsconfig-tests.json && tape test.js && jsmd readme.md"
+    "build": "npm run compile:cjs && npm run compile:esm",
+    "test": "tslint --project . && tsc --project tsconfig-tests.json && tape test.js && jsmd readme.md"
   },
   "repository": {
     "type": "git",
@@ -26,10 +26,10 @@
   },
   "homepage": "https://github.com/TehShrike/key-master",
   "devDependencies": {
-    "jsmd": "1.0.0",
+    "jsmd": "^1.0.1",
     "tape": "4.9.1",
     "ts-node": "^8.3.0",
     "tslint": "^5.18.0",
-    "typescript": "^3.5.2"
+    "typescript": "^3.5.3"
   }
 }
