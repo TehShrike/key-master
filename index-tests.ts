@@ -1,4 +1,4 @@
-import keyMaster from './index'
+import keyMaster from './implementation'
 
 interface IUnderlyingMap<K, V> {
 	has(key: K): boolean

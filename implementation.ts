@@ -1,4 +1,4 @@
-interface IUnderlyingMap<K, V> {
+export interface IUnderlyingMap<K, V> {
 	has(key: K): boolean
 	get(key: K): V | undefined
 	delete(key: K): boolean

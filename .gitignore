@@ -1,5 +1,13 @@
 node_modules/
-index.d.ts
-index.d.ts.map
-index.js
-index.js.map
+implementation.d.ts
+implementation.d.ts.map
+implementation.js
+implementation.js.map
+index-cjs.d.ts
+index-cjs.d.ts.map
+index-cjs.js
+index-cjs.js.map
+index-esm.d.ts
+index-esm.d.ts.map
+index-esm.js
+index-esm.js.map

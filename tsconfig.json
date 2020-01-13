@@ -6,6 +6,7 @@
     "declarationMap": true,
     "sourceMap": true,
     "rootDir": ".",
+    "outDir": "./esm",
 
     "strict": true,
 
@@ -15,6 +16,6 @@
     "noFallthroughCasesInSwitch": true
   },
   "include": [
-    "index.ts"
+    "implementation.ts"
   ]
 }
