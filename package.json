@@ -9,7 +9,7 @@
     "compile:cjs": "npx tsc --project tsconfig-cjs.json",
     "compile:esm": "npx tsc --project tsconfig-esm.json",
     "build": "rm -rf cjs/ esm/ && npm run compile:cjs && npm run compile:esm",
-    "test": "tslint --project . && tsc --project tsconfig-tests.json && tape test.js && jsmd readme.md"
+    "test": "npm run build && tslint --project . && tsc --project tsconfig-tests.json && tape test.js && jsmd readme.md"
   },
   "repository": {
     "type": "git",
