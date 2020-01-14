@@ -14,4 +14,4 @@ try { // we cannot check for existence of the module object, Webpack would "simp
 		const realModule = Object.getPrototypeOf(module)
 		realModule.exports = mapFactory
 	}
-} catch {}
+} catch {} // tslint:disable-line:no-empty
