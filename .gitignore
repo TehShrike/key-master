@@ -3,11 +3,13 @@ implementation.d.ts
 implementation.d.ts.map
 implementation.js
 implementation.js.map
+implementation.mjs
+implementation.mjs.map
 index-cjs.d.ts
 index-cjs.d.ts.map
 index-cjs.js
 index-cjs.js.map
 index-esm.d.ts
 index-esm.d.ts.map
-index-esm.js
-index-esm.js.map
+index-esm.mjs
+index-esm.mjs.map
