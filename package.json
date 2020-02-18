@@ -2,10 +2,12 @@
   "name": "key-master",
   "version": "4.1.0",
   "description": "hashmap + constructor function = a hashmap you don't have to check before calling get()",
-  "main": "index.js",
+  "main": "./cjs/index-cjs.js",
   "scripts": {
-    "build": "tsc --project .",
-    "test": "tslint --project . && tsc --project tsconfig-tests.json && tape test.js && jsmd readme.md"
+    "compile:cjs": "npx tsc --project tsconfig-cjs.json",
+    "compile:esm": "npx tsc --project tsconfig-esm.json && mv esm/implementation.js esm/implementation.mjs && mv esm/implementation.js.map esm/implementation.mjs.map && mv esm/index-esm.js esm/index-esm.mjs && mv esm/index-esm.js.map esm/index-esm.mjs.map && sed -i \"s/implementation.js';/implementation.mjs'/\" esm/index-esm.mjs",
+    "build": "rm -rf cjs/ esm/ && npm run compile:cjs && npm run compile:esm",
+    "test": "npm run build && tslint --project . && tsc --project tsconfig-tests.json && tape test.js && jsmd readme.md"
   },
   "repository": {
     "type": "git",

@@ -44,7 +44,9 @@ actuallyDoStuff(map.get('howdy'))
 # Usage
 
 - Install: `npm install key-master`
-- Use: `const keyMaster = require('key-master')`
+- Use: `const keyMaster = require('key-master')` or
+  `import keyMaster from 'key-master'` (the package provides both CommonJS and
+  ES modules entry points)
 
 This library uses ES2015 syntax, so if you're deploying to IE11, you'll need to be transpiling your project with Babel or something.
 

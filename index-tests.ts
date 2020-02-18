@@ -1,4 +1,4 @@
-import keyMaster = require('./index')
+import keyMaster from './implementation'
 
 interface IUnderlyingMap<K, V> {
 	has(key: K): boolean
